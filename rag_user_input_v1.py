@@ -198,7 +198,71 @@ def build_knowledge_base(document_text):
     print(
         "Vector index ready."
     )
+def build_knowledge_base_from_chunks(document_chunks):
 
+    global document
+    global chunks
+    global chunk_embeddings
+    global index
+    global RETURN_WINDOW_DAYS
+
+    if not document_chunks:
+        raise ValueError(
+            "Document chunks cannot be empty."
+        )
+
+    chunk_texts = [
+        chunk["text"]
+        for chunk in document_chunks
+        if chunk.get("text", "").strip()
+    ]
+
+    if not chunk_texts:
+        raise ValueError(
+            "Document chunks do not contain any text."
+        )
+
+    chunks = [
+        chunk
+        for chunk in document_chunks
+        if chunk.get("text", "").strip()
+    ]
+
+    document = "\n".join(
+        chunk["text"]
+        for chunk in chunks
+    )
+
+    print(
+        "\nDocument chunks processed successfully."
+    )
+
+    print(
+        f"Created {len(chunks)} metadata chunks."
+    )
+
+    chunk_embeddings = embedding_model.encode(
+        [
+            chunk["text"]
+            for chunk in chunks
+        ],
+        normalize_embeddings=True
+    )
+
+    index = NearestNeighbors(
+        metric="cosine",
+        algorithm="brute"
+    )
+
+    index.fit(
+        chunk_embeddings
+    )
+
+    RETURN_WINDOW_DAYS = get_return_window_days()
+
+    print(
+        "Vector index ready."
+    )    
 # ==================================================
 # 7) RETRIEVAL
 # ==================================================
@@ -225,13 +289,34 @@ def retrieve(query):
         indices[0]
     ):
 
-        results.append(
-            {
-                "text": chunks[idx],
+          chunk_item = chunks[idx]
+
+          if isinstance(chunk_item, dict):
+
+            result = {
+                "text": chunk_item["text"],
+                "score": float(
+                    1 - distance
+                ),
+                "source": chunk_item.get(
+                    "source"
+                ),
+                "page": chunk_item.get(
+                    "page"
+                )
+            }
+
+          else:
+
+            result = {
+                "text": chunk_item,
                 "score": float(
                     1 - distance
                 )
             }
+
+          results.append(
+            result
         )
 
     return results
@@ -257,13 +342,17 @@ def create_evidence_candidates(
         if chunk_text not in seen:
 
             candidates.append(
-                {
-                    "text": chunk_text,
-                    "type": "full_chunk",
-                    "retrieval_score":
-                        result["score"]
-                }
-            )
+    {
+        "text": chunk_text,
+        "type": "full_chunk",
+        "retrieval_score":
+            result["score"],
+        "source":
+            result.get("source"),
+        "page":
+            result.get("page")
+    }
+)
 
             seen.add(
                 chunk_text
@@ -277,13 +366,17 @@ def create_evidence_candidates(
             if sentence not in seen:
 
                 candidates.append(
-                    {
-                        "text": sentence,
-                        "type": "sentence",
-                        "retrieval_score":
-                            result["score"]
-                    }
-                )
+    {
+        "text": sentence,
+        "type": "sentence",
+        "retrieval_score":
+            result["score"],
+        "source":
+            result.get("source"),
+        "page":
+            result.get("page")
+    }
+)
 
                 seen.add(
                     sentence
@@ -397,7 +490,11 @@ def verify_claims(
 
                     "evidence":
                         None,
+                    "source":
+                        None,
 
+                    "page":
+                        None,
                     "evidence_similarity":
                         0.0,
 
@@ -508,6 +605,11 @@ def verify_claims(
 
                 "evidence_type":
                     best_evidence["type"],
+                "source":
+                    best_evidence.get("source"),
+
+                "page":
+                     best_evidence.get("page"),    
 
                 "evidence_similarity":
                     best_evidence[

@@ -1,0 +1,586 @@
+{
+    "version": "rag_v3_polarity_and_deterministic_reasoning",
+    "config": {
+        "retrieval_threshold": 0.5,
+        "evidence_relevance_threshold": 0.35,
+        "entailment_threshold": 0.7,
+        "contradiction_threshold": 0.85,
+        "top_k": 3
+    },
+    "metrics": {
+        "accuracy": 0.7272727272727273,
+        "precision": 1.0,
+        "recall": 0.45454545454545453,
+        "f1": 0.625,
+        "true_positive": 5,
+        "true_negative": 11,
+        "false_positive": 0,
+        "false_negative": 6
+    },
+    "pipeline_stats": {
+        "repair_success_count": 0,
+        "deterministic_success_count": 1
+    },
+    "tests": [
+        {
+            "question": "How many days do I have to return a product?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "reasoning_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.8140061497688293,
+                "initial_raw": "{\n    \"answer\": \"30 days\",\n    \"claims\": [\"The product must be unused and in its original packaging.\", \"Refunds are processed within 5 business days after the returned product is received.\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"The product must be unused and in its original packaging.\"\n}",
+                "repair_raw": "{\n    \"answer\": \"30 days\",\n    \"claims\": [\"The product must be unused and in its original packaging.\", \"Refunds are processed within 5 business days after the returned product is received.\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"The product must be unused and in its original packaging.\"\n}",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "How long does standard shipping take?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "reasoning_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.8253797292709351,
+                "initial_raw": "{\n    \"answer\": \"Standard shipping usually takes between 3 and 5 business days.\",\n    \"claims\": [\"standalone factual claim\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"standard shipping takes between 3 and 5 business days\"\n}",
+                "repair_raw": "{\n    \"answer\": \"Standard shipping usually takes between 3 and 5 business days.\",\n    \"claims\": [\"standalone factual claim\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"standard shipping takes between 3 and 5 business days\"\n}",
+                "claims": [
+                    {
+                        "claim": "standalone factual claim",
+                        "supported": false,
+                        "reason": "claim_not_entailed",
+                        "evidence": null,
+                        "evidence_similarity": 0.0,
+                        "entailment": 0.0,
+                        "contradiction": 0.0,
+                        "neutral": 1.0
+                    }
+                ],
+                "polarity_result": {
+                    "supported": true,
+                    "reason": "yes_supported_by_entailment",
+                    "polarity": "yes",
+                    "proposition": "standard shipping takes between 3 and 5 business days",
+                    "evidence": "Standard shipping usually takes between 3 and 5 business days.",
+                    "evidence_type": "sentence",
+                    "evidence_similarity": 0.951814591884613,
+                    "entailment": 0.9938289523124695,
+                    "contradiction": 9.37519216677174e-05,
+                    "neutral": 0.0060773128643631935
+                }
+            }
+        },
+        {
+            "question": "How long does express shipping take?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Express shipping takes 1 to 2 business days.",
+                "pipeline_stage": "initial_supported",
+                "reasoning_type": "llm_verified",
+                "repair_used": false,
+                "retrieval_score": 0.854271650314331,
+                "claims": [
+                    {
+                        "claim": "express shipping takes 1 to 2 business days",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Express shipping is available and normally takes 1 to 2 business days.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9098833799362183,
+                        "entailment": 0.9943647384643555,
+                        "contradiction": 0.00010868882964132354,
+                        "neutral": 0.005526592954993248
+                    }
+                ],
+                "polarity_result": {
+                    "supported": true,
+                    "reason": "yes_supported_by_entailment",
+                    "polarity": "yes",
+                    "proposition": "Express shipping takes 1 to 2 business days.",
+                    "evidence": "Express shipping is available and normally takes 1 to 2 business days.",
+                    "evidence_type": "sentence",
+                    "evidence_similarity": 0.9617490768432617,
+                    "entailment": 0.9954534769058228,
+                    "contradiction": 0.00015630882990080863,
+                    "neutral": 0.004390201065689325
+                }
+            }
+        },
+        {
+            "question": "How long is the warranty for electronics?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "reasoning_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.6452404260635376,
+                "initial_raw": "{\n    \"answer\": \"Two years\",\n    \"claims\": [\"The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"The warranty is two years long.\"\n}",
+                "repair_raw": "```json\n{\n    \"answer\": \"Two years\",\n    \"claims\": [\"The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.\", \"Premium members receive free standard shipping on all orders\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"The warranty is two years long.\"\n}\n```",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "Does the warranty cover accidental damage?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "reasoning_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.6889804601669312,
+                "initial_raw": "```json\n{\n    \"answer\": \"Yes\",\n    \"claims\": [\"The warranty covers accidental damage.\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, the warranty covers accidental damage.\"\n}\n```",
+                "repair_raw": "```json\n{\n    \"answer\": \"No\",\n    \"claims\": [\"The warranty does not cover accidental damage\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"The warranty does not cover accidental damage.\"\n}\n```",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "Do premium members get free standard shipping?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium members receive free standard shipping.",
+                "pipeline_stage": "initial_supported",
+                "reasoning_type": "llm_verified",
+                "repair_used": false,
+                "retrieval_score": 0.9219530820846558,
+                "claims": [
+                    {
+                        "claim": "premium members receive free standard shipping",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use. Premium members receive free standard shipping on all orders.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.575880229473114,
+                        "entailment": 0.9980151653289795,
+                        "contradiction": 4.970229565515183e-05,
+                        "neutral": 0.0019350837683305144
+                    }
+                ],
+                "polarity_result": {
+                    "supported": true,
+                    "reason": "yes_supported_by_entailment",
+                    "polarity": "yes",
+                    "proposition": "Yes, premium members receive free standard shipping.",
+                    "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use. Premium members receive free standard shipping on all orders.",
+                    "evidence_type": "full_chunk",
+                    "evidence_similarity": 0.5612187385559082,
+                    "entailment": 0.9983044862747192,
+                    "contradiction": 9.124039206653833e-05,
+                    "neutral": 0.0016042720526456833
+                }
+            }
+        },
+        {
+            "question": "Can I send my order back after three weeks?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "reasoning_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.5240789651870728,
+                "initial_raw": "{\n    \"answer\": \"Yes, you can send your order back after three weeks.\",\n    \"claims\": [\"The statement 'you can send your order back after three weeks' is accurate\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, you can send your order back after three weeks.\"\n}",
+                "repair_raw": "{\n    \"answer\": \"No, you cannot send your order back after three weeks.\",\n    \"claims\": [\"The statement 'you cannot send your order back after three weeks' is inaccurate\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"No, you cannot send your order back after three weeks.\"\n}",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "When will I receive my refund after you get my return?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "reasoning_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.6386163234710693,
+                "initial_raw": "{\n    \"answer\": \"Within 5 business days after the returned product is received.\",\n    \"claims\": [\"stands alone factual claim\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"positive factual proposition\"\n}",
+                "repair_raw": "{\n    \"answer\": \"Within 5 business days after the returned product is received.\",\n    \"claims\": [\"stands alone factual claim\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"positive factual proposition\"\n}",
+                "claims": [
+                    {
+                        "claim": "stands alone factual claim",
+                        "supported": false,
+                        "reason": "claim_not_entailed",
+                        "evidence": null,
+                        "evidence_similarity": 0.0,
+                        "entailment": 0.0,
+                        "contradiction": 0.0,
+                        "neutral": 1.0
+                    }
+                ],
+                "polarity_result": {
+                    "supported": false,
+                    "reason": "yes_not_entailed",
+                    "polarity": "yes",
+                    "proposition": "positive factual proposition",
+                    "evidence": null,
+                    "evidence_similarity": 0.0,
+                    "entailment": 0.0,
+                    "contradiction": 0.0,
+                    "neutral": 1.0
+                }
+            }
+        },
+        {
+            "question": "Can premium membership be cancelled anytime?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium membership can be cancelled anytime.",
+                "pipeline_stage": "initial_supported",
+                "reasoning_type": "llm_verified",
+                "repair_used": false,
+                "retrieval_score": 0.9689069986343384,
+                "claims": [
+                    {
+                        "claim": "premium membership can be cancelled anytime.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "They also receive early access to discounts and special promotions. Premium membership can be cancelled at any time.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.8355465531349182,
+                        "entailment": 0.9981195330619812,
+                        "contradiction": 4.115052070119418e-05,
+                        "neutral": 0.0018393213395029306
+                    }
+                ],
+                "polarity_result": {
+                    "supported": true,
+                    "reason": "yes_supported_by_entailment",
+                    "polarity": "yes",
+                    "proposition": "Yes, premium membership can be cancelled anytime.",
+                    "evidence": "They also receive early access to discounts and special promotions. Premium membership can be cancelled at any time.",
+                    "evidence_type": "full_chunk",
+                    "evidence_similarity": 0.8063226938247681,
+                    "entailment": 0.99788898229599,
+                    "contradiction": 3.201023719157092e-05,
+                    "neutral": 0.002078971127048135
+                }
+            }
+        },
+        {
+            "question": "Can shipping take longer during holidays?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, shipping times may be longer during holidays.",
+                "pipeline_stage": "initial_supported",
+                "reasoning_type": "llm_verified",
+                "repair_used": false,
+                "retrieval_score": 0.7094920873641968,
+                "claims": [
+                    {
+                        "claim": "The shipping times may be longer during holidays.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Shipping times may be longer during holidays.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9928032159805298,
+                        "entailment": 0.998146653175354,
+                        "contradiction": 7.500759238610044e-05,
+                        "neutral": 0.001778344507329166
+                    }
+                ],
+                "polarity_result": {
+                    "supported": true,
+                    "reason": "yes_supported_by_entailment",
+                    "polarity": "yes",
+                    "proposition": "Yes, shipping times may be longer during holidays.",
+                    "evidence": "Express shipping is available and normally takes 1 to 2 business days. Shipping times may be longer during holidays.",
+                    "evidence_type": "full_chunk",
+                    "evidence_similarity": 0.6536334753036499,
+                    "entailment": 0.9972739815711975,
+                    "contradiction": 6.231253064470366e-05,
+                    "neutral": 0.002663686638697982
+                }
+            }
+        },
+        {
+            "question": "Can I return a used product after 10 days?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "No. The return policy requires the product to be unused and in its original packaging.",
+                "pipeline_stage": "deterministic_supported",
+                "reasoning_type": "deterministic_return_condition",
+                "calculation": null,
+                "repair_used": false,
+                "retrieval_score": 0.7637839913368225,
+                "claims": [
+                    {
+                        "claim": "The product must be unused and in its original packaging.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The product must be unused and in its original packaging.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 1.0,
+                        "entailment": 0.993261992931366,
+                        "contradiction": 0.0003076912835240364,
+                        "neutral": 0.006430220324546099
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I pay with Bitcoin?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "reasoning_type": "retrieval",
+                "repair_used": false,
+                "retrieval_score": 0.23918002843856812,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I pay with PayPal?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "reasoning_type": "retrieval",
+                "repair_used": false,
+                "retrieval_score": 0.26043951511383057,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you have physical stores?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "reasoning_type": "retrieval",
+                "repair_used": false,
+                "retrieval_score": 0.2167431116104126,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do premium members get a student discount?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.6776645183563232,
+                "initial_raw": "{\n    \"answer\": \"Yes, premium members do get a student discount.\",\n    \"claims\": [\"premium members get a student discount\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, premium members do get a student discount.\"\n}",
+                "repair_raw": "{\n    \"answer\": \"No, premium members do not get a student discount.\",\n    \"claims\": [\"premium members do not get a student discount\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"No, premium members do not get a student discount.\"\n}",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "Can premium members get free express shipping?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.8194589614868164,
+                "initial_raw": "{\n    \"answer\": \"Yes, premium members can get free express shipping.\",\n    \"claims\": [\"premium members can get free express shipping\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, premium members can get free express shipping.\"\n}",
+                "repair_raw": "{\n    \"answer\": \"No, premium members cannot get free express shipping.\",\n    \"claims\": [\"premium members cannot get free express shipping\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"No, premium members cannot get free express shipping.\"\n}",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "Does the warranty cover stolen electronics?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.6475660800933838,
+                "initial_raw": "{\n    \"answer\": \"No, the warranty does not cover stolen electronics.\",\n    \"claims\": [\n        \"The warranty does not cover stolen electronics.\"\n    ],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"The warranty does not cover stolen electronics.\"\n}",
+                "repair_raw": "```json\n{\n    \"answer\": \"Yes, the warranty does cover stolen electronics.\",\n    \"claims\": [\n        \"The warranty does cover stolen electronics.\"\n    ],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, the warranty does cover stolen electronics.\"\n}\n```",
+                "claims": [
+                    {
+                        "claim": "The warranty does cover stolen electronics.",
+                        "supported": false,
+                        "reason": "claim_not_entailed",
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.7255866527557373,
+                        "entailment": 0.0005732695572078228,
+                        "contradiction": 0.052954696118831635,
+                        "neutral": 0.9464719891548157
+                    }
+                ],
+                "polarity_result": {
+                    "supported": false,
+                    "reason": "yes_not_entailed",
+                    "polarity": "yes",
+                    "proposition": "Yes, the warranty does cover stolen electronics.",
+                    "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                    "evidence_type": "sentence",
+                    "evidence_similarity": 0.6441937685012817,
+                    "entailment": 5.226260327617638e-05,
+                    "contradiction": 0.9993141889572144,
+                    "neutral": 0.0006335278158076108
+                }
+            }
+        },
+        {
+            "question": "Do you offer same-day delivery?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "reasoning_type": "retrieval",
+                "repair_used": false,
+                "retrieval_score": 0.4338131546974182,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I change my delivery address after ordering?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "reasoning_type": "retrieval",
+                "repair_used": false,
+                "retrieval_score": 0.3399869203567505,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you ship internationally?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "reasoning_type": "retrieval",
+                "repair_used": false,
+                "retrieval_score": 0.34691286087036133,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I extend the electronics warranty to three years?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.558906614780426,
+                "initial_raw": "{\n    \"answer\": \"Yes, you can extend the electronics warranty to three years.\",\n    \"claims\": [\"you can extend the electronics warranty to three years\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, you can extend the electronics warranty to three years.\"\n}",
+                "repair_raw": "```json\n{\n    \"answer\": \"No, you cannot extend the electronics warranty to three years.\",\n    \"claims\": [\"No, you cannot extend the electronics warranty to three years.\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"No, you cannot extend the electronics warranty to three years.\"\n}\n```",
+                "claims": [],
+                "polarity_result": null
+            }
+        },
+        {
+            "question": "Do refunds go back to the original payment method?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "reasoning_type": "verification_failure",
+                "repair_used": true,
+                "retrieval_score": 0.5995515584945679,
+                "initial_raw": "{\n    \"answer\": \"Yes\",\n    \"claims\": [\"refunds go back to the original payment method\"],\n    \"is_yes_no\": true,\n    \"polarity\": \"yes\",\n    \"proposition\": \"Yes, refunds go back to the original payment method.\"\n}",
+                "repair_raw": "{\n    \"answer\": \"No\",\n    \"claims\": [\"refunds do not go back to the original payment method\"],\n    \"is_yes_no\": false,\n    \"polarity\": \"unknown\",\n    \"proposition\": \"No, refunds do not go back to the original payment method.\"\n}",
+                "claims": [],
+                "polarity_result": null
+            }
+        }
+    ]
+}

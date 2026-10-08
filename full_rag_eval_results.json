@@ -1,0 +1,476 @@
+{
+    "config": {
+        "retrieval_threshold": 0.5,
+        "evidence_relevance_threshold": 0.35,
+        "entailment_threshold": 0.7,
+        "top_k": 3
+    },
+    "metrics": {
+        "accuracy": 0.8636363636363636,
+        "precision": 1.0,
+        "recall": 0.7272727272727273,
+        "f1": 0.8421052631578948,
+        "true_positive": 8,
+        "true_negative": 11,
+        "false_positive": 0,
+        "false_negative": 3
+    },
+    "tests": [
+        {
+            "question": "How many days do I have to return a product?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "customers can return products within 30 days after delivery.",
+                "retrieval_score": 0.8140061497688293,
+                "claims": [
+                    {
+                        "claim": "customers can return products within 30 days after delivery.",
+                        "supported": true,
+                        "evidence": "Customers can return products within 30 days after delivery.",
+                        "evidence_similarity": 1.0000001192092896,
+                        "entailment": 0.9968512654304504,
+                        "contradiction": 0.00013007468078285456,
+                        "neutral": 0.0030186111107468605,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How long does standard shipping take?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "Standard shipping typically takes between 3 and 5 business days.",
+                "retrieval_score": 0.8253797292709351,
+                "claims": [
+                    {
+                        "claim": "Standard shipping typically takes between 3 and 5 business days.",
+                        "supported": true,
+                        "evidence": "Standard shipping usually takes between 3 and 5 business days.",
+                        "evidence_similarity": 0.9966827034950256,
+                        "entailment": 0.9983205199241638,
+                        "contradiction": 6.0579146520467475e-05,
+                        "neutral": 0.0016188824083656073,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How long does express shipping take?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "Express shipping typically takes 1 to 2 business days.",
+                "retrieval_score": 0.854271650314331,
+                "claims": [
+                    {
+                        "claim": "Express shipping typically takes 1 to 2 business days.",
+                        "supported": true,
+                        "evidence": "Express shipping is available and normally takes 1 to 2 business days.",
+                        "evidence_similarity": 0.9512869119644165,
+                        "entailment": 0.9983388185501099,
+                        "contradiction": 4.947119305143133e-05,
+                        "neutral": 0.0016117057530209422,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How long is the warranty for electronics?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "result": {
+                "status": "not_supported",
+                "answer": "Two years",
+                "retrieval_score": 0.6452404260635376,
+                "claims": [
+                    {
+                        "claim": "Two years",
+                        "supported": false,
+                        "evidence": "All electronic products include a two-year warranty.",
+                        "evidence_similarity": 0.4361308515071869,
+                        "entailment": 0.027592236176133156,
+                        "contradiction": 0.004764399491250515,
+                        "neutral": 0.9676433801651001,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Does the warranty cover accidental damage?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "result": {
+                "status": "not_supported",
+                "answer": "Yes, the warranty covers accidental damage.",
+                "retrieval_score": 0.6889804601669312,
+                "claims": [
+                    {
+                        "claim": "Yes, the warranty covers accidental damage.",
+                        "supported": false,
+                        "evidence": "All electronic products include a two-year warranty.",
+                        "evidence_similarity": 0.4587039351463318,
+                        "entailment": 0.003843847196549177,
+                        "contradiction": 0.0003039670700673014,
+                        "neutral": 0.9958522319793701,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Do premium members get free standard shipping?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium members do get free standard shipping.",
+                "retrieval_score": 0.9219530820846558,
+                "claims": [
+                    {
+                        "claim": "Yes, premium members do get free standard shipping.",
+                        "supported": true,
+                        "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use. Premium members receive free standard shipping on all orders.",
+                        "evidence_similarity": 0.580375075340271,
+                        "entailment": 0.997771680355072,
+                        "contradiction": 0.00011069441825384274,
+                        "neutral": 0.002117533702403307,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I send my order back after three weeks?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "Yes, you can send your order back after three weeks.",
+                "retrieval_score": 0.5240789651870728,
+                "claims": [
+                    {
+                        "claim": "Yes, you can send your order back after three weeks.",
+                        "supported": true,
+                        "evidence": "Customers can return products within 30 days after delivery.",
+                        "evidence_similarity": 0.5855455994606018,
+                        "entailment": 0.9633016586303711,
+                        "contradiction": 0.018660487607121468,
+                        "neutral": 0.018037870526313782,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "When will I receive my refund after you get my return?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "After the returned product is received.",
+                "retrieval_score": 0.6386163234710693,
+                "claims": [
+                    {
+                        "claim": "After the returned product is received.",
+                        "supported": true,
+                        "evidence": "The product must be unused and in its original packaging. Refunds are processed within 5 business days after the returned product is received.",
+                        "evidence_similarity": 0.5807568430900574,
+                        "entailment": 0.9965534210205078,
+                        "contradiction": 0.00021247580298222601,
+                        "neutral": 0.0032340611796826124,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can premium membership be cancelled anytime?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium membership can be cancelled anytime.",
+                "retrieval_score": 0.9689069986343384,
+                "claims": [
+                    {
+                        "claim": "Yes, premium membership can be cancelled anytime.",
+                        "supported": true,
+                        "evidence": "They also receive early access to discounts and special promotions. Premium membership can be cancelled at any time.",
+                        "evidence_similarity": 0.8063226938247681,
+                        "entailment": 0.99788898229599,
+                        "contradiction": 3.201023719157092e-05,
+                        "neutral": 0.002078971127048135,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can shipping take longer during holidays?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "result": {
+                "status": "supported",
+                "answer": "Yes, shipping can take longer during holidays.",
+                "retrieval_score": 0.7094920873641968,
+                "claims": [
+                    {
+                        "claim": "Yes, shipping can take longer during holidays.",
+                        "supported": true,
+                        "evidence": "Shipping times may be longer during holidays.",
+                        "evidence_similarity": 0.8863934874534607,
+                        "entailment": 0.9979088306427002,
+                        "contradiction": 4.065778921358287e-05,
+                        "neutral": 0.0020504589192569256,
+                        "reason": "supported"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I return a used product after 10 days?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "result": {
+                "status": "not_supported",
+                "answer": "No, you cannot return a used product after 10 days.",
+                "retrieval_score": 0.7637839913368225,
+                "claims": [
+                    {
+                        "claim": "No, you cannot return a used product after 10 days.",
+                        "supported": false,
+                        "evidence": "The product must be unused and in its original packaging.",
+                        "evidence_similarity": 0.37577933073043823,
+                        "entailment": 0.003790516871958971,
+                        "contradiction": 0.0030129740480333567,
+                        "neutral": 0.9931964874267578,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I pay with Bitcoin?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "reason": "retrieval_similarity_too_low",
+                "retrieval_score": 0.23918002843856812,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I pay with PayPal?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "reason": "retrieval_similarity_too_low",
+                "retrieval_score": 0.26043951511383057,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you have physical stores?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "reason": "retrieval_similarity_too_low",
+                "retrieval_score": 0.2167431116104126,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do premium members get a student discount?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "No, premium members do not get a student discount.",
+                "retrieval_score": 0.6776645183563232,
+                "claims": [
+                    {
+                        "claim": "No, premium members do not get a student discount.",
+                        "supported": false,
+                        "evidence": "Premium membership can be cancelled at any time.",
+                        "evidence_similarity": 0.5487326979637146,
+                        "entailment": 0.0005943303112871945,
+                        "contradiction": 0.9954802989959717,
+                        "neutral": 0.0039253439754247665,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can premium members get free express shipping?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "No, premium members cannot get free express shipping. Express shipping is available for regular customers only.",
+                "retrieval_score": 0.8194589614868164,
+                "claims": [
+                    {
+                        "claim": "No, premium members cannot get free express shipping.",
+                        "supported": false,
+                        "evidence": "Premium members receive free standard shipping on all orders.",
+                        "evidence_similarity": 0.8179579973220825,
+                        "entailment": 0.002039983868598938,
+                        "contradiction": 0.6867542266845703,
+                        "neutral": 0.31120577454566956,
+                        "reason": "evidence_does_not_entail_claim"
+                    },
+                    {
+                        "claim": "Express shipping is available for regular customers only.",
+                        "supported": false,
+                        "evidence": "Premium members receive free standard shipping on all orders.",
+                        "evidence_similarity": 0.5891108512878418,
+                        "entailment": 6.888117786729708e-05,
+                        "contradiction": 0.03237286955118179,
+                        "neutral": 0.9675582647323608,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Does the warranty cover stolen electronics?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "No, the warranty does not cover stolen electronics.",
+                "retrieval_score": 0.6475660800933838,
+                "claims": [
+                    {
+                        "claim": "No, the warranty does not cover stolen electronics.",
+                        "supported": false,
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_similarity": 0.6928925514221191,
+                        "entailment": 0.6943413019180298,
+                        "contradiction": 0.011570814996957779,
+                        "neutral": 0.29408785700798035,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Do you offer same-day delivery?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "reason": "retrieval_similarity_too_low",
+                "retrieval_score": 0.4338131546974182,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I change my delivery address after ordering?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "reason": "retrieval_similarity_too_low",
+                "retrieval_score": 0.3399869203567505,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you ship internationally?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "reason": "retrieval_similarity_too_low",
+                "retrieval_score": 0.34691286087036133,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I extend the electronics warranty to three years?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "No, you cannot extend the electronics warranty to three years based on the given context.",
+                "retrieval_score": 0.558906614780426,
+                "claims": [
+                    {
+                        "claim": "No, you cannot extend the electronics warranty to three years based on the given context.",
+                        "supported": false,
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_similarity": 0.5633499622344971,
+                        "entailment": 0.014262523502111435,
+                        "contradiction": 0.0037866532802581787,
+                        "neutral": 0.9819508790969849,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Do refunds go back to the original payment method?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "result": {
+                "status": "not_supported",
+                "answer": "No, refunds do not go back to the original payment method.",
+                "retrieval_score": 0.5995515584945679,
+                "claims": [
+                    {
+                        "claim": "No, refunds do not go back to the original payment method.",
+                        "supported": false,
+                        "evidence": "Refunds are processed within 5 business days after the returned product is received. Standard shipping usually takes between 3 and 5 business days.",
+                        "evidence_similarity": 0.5772463083267212,
+                        "entailment": 5.9157220675842836e-05,
+                        "contradiction": 0.8424969911575317,
+                        "neutral": 0.15744377672672272,
+                        "reason": "evidence_does_not_entail_claim"
+                    }
+                ]
+            }
+        }
+    ]
+}

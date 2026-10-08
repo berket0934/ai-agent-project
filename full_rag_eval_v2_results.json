@@ -1,0 +1,772 @@
+{
+    "version": "rag_v2_structured_claims_repair",
+    "config": {
+        "retrieval_threshold": 0.5,
+        "evidence_relevance_threshold": 0.35,
+        "entailment_threshold": 0.7,
+        "top_k": 3
+    },
+    "metrics": {
+        "accuracy": 0.9090909090909091,
+        "precision": 1.0,
+        "recall": 0.8181818181818182,
+        "f1": 0.9,
+        "true_positive": 9,
+        "true_negative": 11,
+        "false_positive": 0,
+        "false_negative": 2,
+        "repair_success_count": 0
+    },
+    "tests": [
+        {
+            "question": "How many days do I have to return a product?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "30 days",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.8140061497688293,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"30 days\",\n    \"claims\": [\n        \"The product must be unused and in its original packaging.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "30 days",
+                        "claims": [
+                            "The product must be unused and in its original packaging."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "The product must be unused and in its original packaging.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The product must be unused and in its original packaging.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 1.0,
+                        "entailment": 0.993261992931366,
+                        "contradiction": 0.0003076912835240364,
+                        "neutral": 0.006430220324546099
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How long does standard shipping take?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Standard shipping typically takes between 3 and 5 business days.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.8253797292709351,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Standard shipping typically takes between 3 and 5 business days.\",\n    \"claims\": [\n        \"Standard shipping typically takes between 3 and 5 business days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Standard shipping typically takes between 3 and 5 business days.",
+                        "claims": [
+                            "Standard shipping typically takes between 3 and 5 business days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Standard shipping typically takes between 3 and 5 business days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Standard shipping usually takes between 3 and 5 business days.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9966827034950256,
+                        "entailment": 0.9983205199241638,
+                        "contradiction": 6.0579146520467475e-05,
+                        "neutral": 0.0016188824083656073
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How long does express shipping take?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Express shipping takes 1 to 2 business days.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.854271650314331,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Express shipping takes 1 to 2 business days.\",\n    \"claims\": [\n        \"Express shipping takes 1 to 2 business days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Express shipping takes 1 to 2 business days.",
+                        "claims": [
+                            "Express shipping takes 1 to 2 business days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Express shipping takes 1 to 2 business days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Express shipping is available and normally takes 1 to 2 business days.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9617490768432617,
+                        "entailment": 0.9954534769058228,
+                        "contradiction": 0.00015630882990080863,
+                        "neutral": 0.004390201065689325
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How long is the warranty for electronics?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "The warranty is two years.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.6452404260635376,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"The warranty is two years.\",\n    \"claims\": [\n        \"The warranty is two years.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "The warranty is two years.",
+                        "claims": [
+                            "The warranty is two years."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "The warranty is two years.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.6564524173736572,
+                        "entailment": 0.9968709349632263,
+                        "contradiction": 6.735407077940181e-05,
+                        "neutral": 0.0030617504380643368
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Does the warranty cover accidental damage?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "No, the warranty does not cover accidental damage.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.6889804601669312,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, the warranty does not cover accidental damage.\",\n    \"claims\": [\n        \"The warranty does not cover accidental damage.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, the warranty does not cover accidental damage.",
+                        "claims": [
+                            "The warranty does not cover accidental damage."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "The warranty does not cover accidental damage.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.8324090242385864,
+                        "entailment": 0.9970218539237976,
+                        "contradiction": 7.134272891562432e-05,
+                        "neutral": 0.0029068333096802235
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Do premium members get free standard shipping?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium members receive free standard shipping.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.9219530820846558,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, premium members receive free standard shipping.\",\n    \"claims\": [\n        \"Premium members receive free standard shipping.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, premium members receive free standard shipping.",
+                        "claims": [
+                            "Premium members receive free standard shipping."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Premium members receive free standard shipping.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Premium members receive free standard shipping on all orders. They also receive early access to discounts and special promotions.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.9374605417251587,
+                        "entailment": 0.9980302453041077,
+                        "contradiction": 3.9270864363061264e-05,
+                        "neutral": 0.0019305066671222448
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I send my order back after three weeks?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "generation_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.5240789651870728,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, you can send your order back after three weeks.\",\n    \"claims\": [\n        \"You can send your order back after three weeks.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, you can send your order back after three weeks.",
+                        "claims": [
+                            "You can send your order back after three weeks."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot send your order back after three weeks.\",\n    \"claims\": [\n        \"You cannot send your order back after three weeks.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot send your order back after three weeks.",
+                        "claims": [
+                            "You cannot send your order back after three weeks."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "You cannot send your order back after three weeks.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "Customers can return products within 30 days after delivery. The product must be unused and in its original packaging.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.5274920463562012,
+                        "entailment": 0.00014613619714509696,
+                        "contradiction": 0.9967353940010071,
+                        "neutral": 0.003118468914180994
+                    }
+                ]
+            }
+        },
+        {
+            "question": "When will I receive my refund after you get my return?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Within 5 business days after the returned product is received.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.6386163234710693,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Within 5 business days after the returned product is received.\",\n    \"claims\": [\n        \"Within 5 business days after the returned product is received.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Within 5 business days after the returned product is received.",
+                        "claims": [
+                            "Within 5 business days after the returned product is received."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Within 5 business days after the returned product is received.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The product must be unused and in its original packaging. Refunds are processed within 5 business days after the returned product is received.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.7260037064552307,
+                        "entailment": 0.9904541969299316,
+                        "contradiction": 0.00027885095914825797,
+                        "neutral": 0.00926696602255106
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can premium membership be cancelled anytime?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium membership can be cancelled anytime.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.9689069986343384,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, premium membership can be cancelled anytime.\",\n    \"claims\": [\n        \"Premium membership can be cancelled at any time.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, premium membership can be cancelled anytime.",
+                        "claims": [
+                            "Premium membership can be cancelled at any time."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Premium membership can be cancelled at any time.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "They also receive early access to discounts and special promotions. Premium membership can be cancelled at any time.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.8502669334411621,
+                        "entailment": 0.9970628619194031,
+                        "contradiction": 0.00013119146751705557,
+                        "neutral": 0.0028059338219463825
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can shipping take longer during holidays?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, shipping times may be longer during holidays.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "retrieval_score": 0.7094920873641968,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, shipping times may be longer during holidays.\",\n    \"claims\": [\n        \"Shipping times may be longer during holidays.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, shipping times may be longer during holidays.",
+                        "claims": [
+                            "Shipping times may be longer during holidays."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Shipping times may be longer during holidays.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Shipping times may be longer during holidays.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 1.0,
+                        "entailment": 0.9977737069129944,
+                        "contradiction": 8.520706614945084e-05,
+                        "neutral": 0.0021410752087831497
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I return a used product after 10 days?",
+            "expected_supported": true,
+            "predicted_supported": false,
+            "classification": "FN",
+            "error_type": "generation_or_verification_false_negative",
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.7637839913368225,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot return a used product after 10 days.\",\n    \"claims\": [\n        \"You cannot return a used product after 10 days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot return a used product after 10 days.",
+                        "claims": [
+                            "You cannot return a used product after 10 days."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot return a used product after 10 days.\",\n    \"claims\": [\n        \"You cannot return a used product after 10 days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot return a used product after 10 days.",
+                        "claims": [
+                            "You cannot return a used product after 10 days."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "You cannot return a used product after 10 days.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "The product must be unused and in its original packaging. Refunds are processed within 5 business days after the returned product is received.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.6021881103515625,
+                        "entailment": 0.00025190223823301494,
+                        "contradiction": 0.3038198947906494,
+                        "neutral": 0.6959282159805298
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I pay with Bitcoin?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "retrieval_score": 0.23918002843856812,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I pay with PayPal?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "retrieval_score": 0.26043951511383057,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you have physical stores?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "retrieval_score": 0.2167431116104126,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do premium members get a student discount?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.6776645183563232,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, premium members do not get a student discount.\",\n    \"claims\": [\n        \"Premium members do not receive a student discount.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, premium members do not get a student discount.",
+                        "claims": [
+                            "Premium members do not receive a student discount."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, premium members do not get a student discount.\",\n    \"claims\": [\n        \"Premium members do not receive a student discount.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, premium members do not get a student discount.",
+                        "claims": [
+                            "Premium members do not receive a student discount."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "Premium members do not receive a student discount.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "Premium members receive free standard shipping on all orders.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.543921709060669,
+                        "entailment": 0.0006428015185520053,
+                        "contradiction": 0.01021400187164545,
+                        "neutral": 0.9891431927680969
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can premium members get free express shipping?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.8194589614868164,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, premium members can get free express shipping.\",\n    \"claims\": [\n        \"Premium members can get free express shipping.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, premium members can get free express shipping.",
+                        "claims": [
+                            "Premium members can get free express shipping."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, premium members cannot get free express shipping.\",\n    \"claims\": [\n        \"Premium members cannot get free express shipping.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, premium members cannot get free express shipping.",
+                        "claims": [
+                            "Premium members cannot get free express shipping."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "Premium members cannot get free express shipping.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "Premium members receive free standard shipping on all orders.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.7584189772605896,
+                        "entailment": 0.0019827596843242645,
+                        "contradiction": 0.0074298446998000145,
+                        "neutral": 0.9905874133110046
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Does the warranty cover stolen electronics?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.6475660800933838,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, the warranty does not cover stolen electronics.\",\n    \"claims\": [\n        \"The warranty does not cover stolen electronics.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, the warranty does not cover stolen electronics.",
+                        "claims": [
+                            "The warranty does not cover stolen electronics."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, the warranty does not cover stolen electronics.\",\n    \"claims\": []\n}",
+                    "parsed": {
+                        "answer": "No, the warranty does not cover stolen electronics.",
+                        "claims": []
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "no_claims_generated",
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you offer same-day delivery?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "retrieval_score": 0.4338131546974182,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I change my delivery address after ordering?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "retrieval_score": 0.3399869203567505,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Do you ship internationally?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough information.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "retrieval_score": 0.34691286087036133,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can I extend the electronics warranty to three years?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.558906614780426,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot extend the electronics warranty to three years.\",\n    \"claims\": [\n        \"You cannot extend the electronics warranty to three years.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot extend the electronics warranty to three years.",
+                        "claims": [
+                            "You cannot extend the electronics warranty to three years."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot extend the electronics warranty to three years.\",\n    \"claims\": [\n        \"You cannot extend the electronics warranty to three years.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot extend the electronics warranty to three years.",
+                        "claims": [
+                            "You cannot extend the electronics warranty to three years."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "You cannot extend the electronics warranty to three years.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "Shipping times may be longer during holidays. All electronic products include a two-year warranty.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.4974583387374878,
+                        "entailment": 0.001976584317162633,
+                        "contradiction": 0.0019456804729998112,
+                        "neutral": 0.9960777163505554
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Do refunds go back to the original payment method?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "retrieval_score": 0.5995515584945679,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, refunds do not go back to the original payment method.\",\n    \"claims\": [\n        \"Refunds do not go back to the original payment method.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, refunds do not go back to the original payment method.",
+                        "claims": [
+                            "Refunds do not go back to the original payment method."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, refunds do not go back to the original payment method.\",\n    \"claims\": [\n        \"Refunds do not go back to the original payment method.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, refunds do not go back to the original payment method.",
+                        "claims": [
+                            "Refunds do not go back to the original payment method."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "Refunds do not go back to the original payment method.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "The product must be unused and in its original packaging. Refunds are processed within 5 business days after the returned product is received.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.5768930912017822,
+                        "entailment": 0.00040304320282302797,
+                        "contradiction": 0.7714937925338745,
+                        "neutral": 0.2281031608581543
+                    }
+                ]
+            }
+        }
+    ]
+}

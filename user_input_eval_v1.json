@@ -42,5 +42,36 @@
         "expected_supported": false
       }
     ]
-  }
+  },
+  {
+  "name": "software_subscription_policy",
+  "knowledge_text": "The Basic plan costs 10 dollars per month. The Pro plan costs 25 dollars per month. Priority customer support is available only on the Pro plan. Users can cancel their subscription at any time. Account data is retained for 30 days after cancellation. Annual subscriptions receive a 15 percent discount.",
+  "questions": [
+    {
+      "question": "How much does the Pro plan cost per month?",
+      "expected_supported": true
+    },
+    {
+      "question": "Does the Pro plan include priority customer support?",
+      "expected_supported": true
+    },
+    {
+      "question": "Can users cancel their subscription at any time?",
+      "expected_supported": true
+    },
+    {
+      "question": "Does the Basic plan include priority customer support?",
+      "expected_supported": true
+    },
+    {
+      "question": "Does the platform offer a student discount?",
+      "expected_supported": false
+    },
+    {
+      "question": "Does the Pro plan include unlimited cloud storage?",
+      "expected_supported": false
+    }
+  ]
+}
+  
 ]

@@ -117,20 +117,27 @@ def create_chunks(
 
 
 chunks = create_chunks(document)
+print(
+    f"\nKnowledge text processed successfully."
+)
+
+print(
+    f"Created {len(chunks)} chunks."
+)
 
 
 # ==================================================
 # 5) MODELLER
 # ==================================================
 
-print("Embedding modeli yükleniyor...")
+print("Loading embedding model...")
 
 embedding_model = SentenceTransformer(
     "all-MiniLM-L6-v2"
 )
 
 
-print("Local LLM yükleniyor...")
+print("Loading local language model...")
 
 llm_name = "Qwen/Qwen2.5-0.5B-Instruct"
 
@@ -144,7 +151,7 @@ llm = AutoModelForCausalLM.from_pretrained(
 )
 
 
-print("Verifier modeli yükleniyor...")
+print("Loading verification model...")
 
 verifier = CrossEncoder(
     "cross-encoder/nli-deberta-v3-base"
@@ -170,6 +177,9 @@ index.fit(
     chunk_embeddings
 )
 
+print(
+    "Vector index ready."
+)
 
 # ==================================================
 # 7) RETRIEVAL

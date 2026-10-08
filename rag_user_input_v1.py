@@ -1,6 +1,7 @@
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from sklearn.neighbors import NearestNeighbors
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from hybrid_retrieval import HybridRetriever
 
 import torch
 import torch.nn.functional as F
@@ -157,6 +158,9 @@ verifier = CrossEncoder(
 chunk_embeddings = None
 index = None
 
+pdf_embedding_model = None
+hybrid_retriever = None
+knowledge_base_mode = None
 
 def build_knowledge_base(document_text):
 
@@ -165,12 +169,15 @@ def build_knowledge_base(document_text):
     global chunk_embeddings
     global index
     global RETURN_WINDOW_DAYS
+    global knowledge_base_mode
 
     if not document_text.strip():
         raise ValueError(
             "Knowledge text cannot be empty."
         )
     document = document_text
+    knowledge_base_mode = "text"
+
     chunks = create_chunks(document_text)
 
     print(
@@ -205,6 +212,9 @@ def build_knowledge_base_from_chunks(document_chunks):
     global chunk_embeddings
     global index
     global RETURN_WINDOW_DAYS
+    global knowledge_base_mode
+    global pdf_embedding_model
+    global hybrid_retriever
 
     if not document_chunks:
         raise ValueError(
@@ -232,7 +242,36 @@ def build_knowledge_base_from_chunks(document_chunks):
         chunk["text"]
         for chunk in chunks
     )
+    knowledge_base_mode = "pdf"
+    if pdf_embedding_model is None:
 
+        print(
+            "Loading multilingual PDF embedding model..."
+        )
+
+        pdf_embedding_model = SentenceTransformer(
+            "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+        )
+
+
+    if hybrid_retriever is None:
+
+        print(
+            "Loading hybrid PDF retriever..."
+        )
+
+        hybrid_retriever = HybridRetriever(
+            embedding_model=pdf_embedding_model
+        )
+
+
+    hybrid_retriever.build(
+        chunks
+    )
+
+    print(
+        "Hybrid PDF retriever ready."
+    )
     print(
         "\nDocument chunks processed successfully."
     )
@@ -321,6 +360,32 @@ def retrieve(query):
 
     return results
 
+def retrieve_pdf(
+    query,
+    top_k=TOP_K
+):
+
+    if hybrid_retriever is None:
+
+        raise ValueError(
+            "PDF knowledge base has not been built."
+        )
+
+    results = hybrid_retriever.retrieve(
+        query,
+        top_k=top_k
+    )
+
+    # Compatibility with the existing RAG pipeline.
+    # IMPORTANT:
+    # This is a raw reranker score, NOT cosine similarity.
+    # Therefore RETRIEVAL_THRESHOLD must NOT be applied to it.
+    for result in results:
+        result["score"] = result[
+            "reranker_score"
+        ]
+
+    return results
 
 # ==================================================
 # 8) EVIDENCE CANDIDATES
@@ -1501,7 +1566,15 @@ def run_rag_v2(question):
     # RETRIEVAL
     # ==================================================
 
-    retrieved = retrieve(
+    if knowledge_base_mode == "pdf":
+
+        retrieved = retrieve_pdf(
+        question
+    )
+
+    else:
+
+        retrieved = retrieve(
         question
     )
 
@@ -1516,9 +1589,10 @@ def run_rag_v2(question):
     # ==================================================
 
     if (
-        best_retrieval_score
-        < RETRIEVAL_THRESHOLD
-    ):
+    knowledge_base_mode != "pdf"
+    and best_retrieval_score
+    < RETRIEVAL_THRESHOLD
+):
 
         return {
 

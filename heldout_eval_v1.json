@@ -1,0 +1,123 @@
+[
+  {
+    "question": "What is the deadline for sending an item back after it has been delivered?",
+    "expected_supported": true
+  },
+  {
+    "question": "Does a returned product need to remain in its original packaging?",
+    "expected_supported": true
+  },
+  {
+    "question": "Once you receive my returned item, how long does refund processing normally take?",
+    "expected_supported": true
+  },
+  {
+    "question": "What is the typical delivery window for standard shipping?",
+    "expected_supported": true
+  },
+  {
+    "question": "How quickly should I normally expect an express shipment to arrive?",
+    "expected_supported": true
+  },
+  {
+    "question": "Could shipping take extra time around holiday periods?",
+    "expected_supported": true
+  },
+  {
+    "question": "What warranty period comes with electronic products?",
+    "expected_supported": true
+  },
+  {
+    "question": "Are manufacturing defects covered by the electronics warranty?",
+    "expected_supported": true
+  },
+  {
+    "question": "If I accidentally damage an electronic product, will the warranty cover it?",
+    "expected_supported": true
+  },
+  {
+    "question": "Is damage caused by improper use covered under the warranty?",
+    "expected_supported": true
+  },
+  {
+    "question": "Which type of shipping do premium members receive for free?",
+    "expected_supported": true
+  },
+  {
+    "question": "Do premium members get access to promotions before other customers?",
+    "expected_supported": true
+  },
+  {
+    "question": "Am I allowed to cancel a premium membership whenever I want?",
+    "expected_supported": true
+  },
+  {
+    "question": "Would returning an order four weeks after delivery still be within the allowed return period?",
+    "expected_supported": true
+  },
+  {
+    "question": "Can I send back a product that I already used if only five days have passed?",
+    "expected_supported": true
+  },
+
+  {
+    "question": "Can I choose store credit instead of receiving a refund?",
+    "expected_supported": false
+  },
+  {
+    "question": "Is express shipping free for premium members?",
+    "expected_supported": false
+  },
+  {
+    "question": "Can I exchange a product for a different size instead of returning it?",
+    "expected_supported": false
+  },
+  {
+    "question": "Who pays the shipping cost when I return a product?",
+    "expected_supported": false
+  },
+  {
+    "question": "Can orders be shipped to countries outside the domestic market?",
+    "expected_supported": false
+  },
+  {
+    "question": "Will I receive a tracking number after my order ships?",
+    "expected_supported": false
+  },
+  {
+    "question": "Are packages delivered on weekends?",
+    "expected_supported": false
+  },
+  {
+    "question": "Is a signature required when my package is delivered?",
+    "expected_supported": false
+  },
+  {
+    "question": "How much does the premium membership cost?",
+    "expected_supported": false
+  },
+  {
+    "question": "Is there a free trial for premium membership?",
+    "expected_supported": false
+  },
+  {
+    "question": "Does the warranty cover normal battery wear over time?",
+    "expected_supported": false
+  },
+  {
+    "question": "Can the electronics warranty be transferred to another person?",
+    "expected_supported": false
+  },
+  {
+    "question": "Can I return a product without a receipt?",
+    "expected_supported": false
+  },
+  {
+    "question": "Can I cancel an order before it has been shipped?",
+    "expected_supported": false
+  },
+  {
+    "question": "Are customs or import fees included in the shipping cost?",
+    "expected_supported": false
+  }
+]

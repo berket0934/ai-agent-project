@@ -164,6 +164,35 @@ if st.button("Ask"):
             st.warning(
                 result["answer"]
             )
+        supported_sources = []
+
+        for claim in result.get("claims", []):
+
+            if (
+                claim.get("supported")
+                and claim.get("source")
+            ):
+
+                source_text = claim["source"]
+
+                if claim.get("page") is not None:
+                    source_text += (
+                        f" — Page {claim['page']}"
+                    )
+
+                if source_text not in supported_sources:
+                    supported_sources.append(
+                        source_text
+                    )
+
+
+        if supported_sources:
+
+            st.caption(
+                "Verified Source: "
+                + " | ".join(supported_sources)
+            )
+
 
         st.write(
             f"**Status:** {result['status'].upper()}"
@@ -173,10 +202,21 @@ if st.button("Ask"):
             f"**Pipeline Stage:** {result['pipeline_stage']}"
         )
 
-        st.write(
-            f"**Retrieval Score:** "
-            f"{result['retrieval_score']:.4f}"
-        )
+        if st.session_state.get("source_type") == "pdf":
+
+            st.write(
+                f"**Reranker Score:** "
+                f"{result['retrieval_score']:.4f}"
+            )
+
+        else:
+
+            st.write(
+                f"**Retrieval Score:** "
+                f"{result['retrieval_score']:.4f}"
+            )
+    
+        
         if result.get("repair_used"):
             st.write("**Repair Used:** Yes")
 

@@ -9,6 +9,7 @@ import re
 import json
 
 
+
 # ==================================================
 # 1) CONFIG
 # ==================================================
@@ -58,7 +59,6 @@ def read_user_document():
     return document_text
 
 
-document = read_user_document()
 
 
 # ==================================================
@@ -116,15 +116,7 @@ def create_chunks(
     return chunks
 
 
-chunks = create_chunks(document)
-print(
-    f"\nKnowledge text processed successfully."
-)
-
-print(
-    f"Created {len(chunks)} chunks."
-)
-
+chunks = []
 
 # ==================================================
 # 5) MODELLER
@@ -162,24 +154,50 @@ verifier = CrossEncoder(
 # 6) VECTOR INDEX
 # ==================================================
 
-chunk_embeddings = embedding_model.encode(
-    chunks,
-    normalize_embeddings=True
-)
+chunk_embeddings = None
+index = None
 
 
-index = NearestNeighbors(
-    metric="cosine",
-    algorithm="brute"
-)
+def build_knowledge_base(document_text):
 
-index.fit(
-    chunk_embeddings
-)
+    global document
+    global chunks
+    global chunk_embeddings
+    global index
+    global RETURN_WINDOW_DAYS
 
-print(
-    "Vector index ready."
-)
+    if not document_text.strip():
+        raise ValueError(
+            "Knowledge text cannot be empty."
+        )
+    document = document_text
+    chunks = create_chunks(document_text)
+
+    print(
+        "\nKnowledge text processed successfully."
+    )
+
+    print(
+        f"Created {len(chunks)} chunks."
+    )
+
+    chunk_embeddings = embedding_model.encode(
+        chunks,
+        normalize_embeddings=True
+    )
+
+    index = NearestNeighbors(
+        metric="cosine",
+        algorithm="brute"
+    )
+
+    index.fit(
+        chunk_embeddings
+    )
+    RETURN_WINDOW_DAYS = get_return_window_days()
+    print(
+        "Vector index ready."
+    )
 
 # ==================================================
 # 7) RETRIEVAL
@@ -1142,9 +1160,7 @@ def get_return_window_days():
     )
 
 
-RETURN_WINDOW_DAYS = (
-    get_return_window_days()
-)
+RETURN_WINDOW_DAYS = None
 
 
 # ==================================================
@@ -1832,6 +1848,8 @@ def print_rag_result(result):
 # ==================================================
 
 def interactive_chat():
+    document_text = read_user_document()
+    build_knowledge_base(document_text)
 
     print("\n" + "=" * 70)
     print("LOCAL VERIFIED RAG")

@@ -1,0 +1,46 @@
+[
+  {
+    "name": "library_policy",
+    "knowledge_text": "The university library is open from 8 AM to 10 PM on weekdays. Students can borrow up to 5 books at the same time. Books can be borrowed for 14 days. Late returns are charged 2 dollars per day. The library is closed on Sundays.",
+    "questions": [
+      {
+        "question": "How many books can a student borrow at the same time?",
+        "expected_supported": true
+      },
+      {
+        "question": "Is the library open on Sundays?",
+        "expected_supported": true
+      },
+      {
+        "question": "Can students reserve private study rooms?",
+        "expected_supported": false
+      },
+      {
+        "question": "Can students borrow up to 5 laptops at the same time?",
+        "expected_supported": false
+      }
+    ]
+  },
+  {
+    "name": "hotel_policy",
+    "knowledge_text": "Hotel check-in begins at 3 PM. Guests must check out by 11 AM. Breakfast is included only with Premium rooms. Reservations can be cancelled free of charge up to 48 hours before arrival. Pets are not allowed in the hotel.",
+    "questions": [
+      {
+        "question": "What time does hotel check-in begin?",
+        "expected_supported": true
+      },
+      {
+        "question": "Are pets allowed in the hotel?",
+        "expected_supported": true
+      },
+      {
+        "question": "Is breakfast included with every room?",
+        "expected_supported": true
+      },
+      {
+        "question": "Does the hotel provide free airport transportation?",
+        "expected_supported": false
+      }
+    ]
+  }
+]

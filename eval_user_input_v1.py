@@ -10,6 +10,10 @@ print(f"Loaded {len(eval_scenarios)} evaluation scenario(s).")
 
 total_questions = 0
 passed_questions = 0
+true_positive = 0
+true_negative = 0
+false_positive = 0
+false_negative = 0
 
 for scenario in eval_scenarios:
 
@@ -37,6 +41,17 @@ for scenario in eval_scenarios:
         passed = (
             actual_supported == expected_supported
         )
+        if expected_supported and actual_supported:
+             true_positive += 1
+
+        elif not expected_supported and not actual_supported:
+             true_negative += 1
+
+        elif not expected_supported and actual_supported:
+             false_positive += 1
+
+        else:
+              false_negative += 1
         total_questions += 1
 
         if passed:
@@ -61,3 +76,31 @@ print(f"Total questions: {total_questions}")
 print(f"Passed:          {passed_questions}")
 print(f"Failed:          {total_questions - passed_questions}")
 print(f"Accuracy:        {accuracy:.2f}%")
+
+precision = (
+    true_positive / (true_positive + false_positive)
+    if (true_positive + false_positive) > 0
+    else 0
+)
+
+recall = (
+    true_positive / (true_positive + false_negative)
+    if (true_positive + false_negative) > 0
+    else 0
+)
+
+f1 = (
+    2 * precision * recall / (precision + recall)
+    if (precision + recall) > 0
+    else 0
+)
+
+print()
+print(f"TP:              {true_positive}")
+print(f"TN:              {true_negative}")
+print(f"FP:              {false_positive}")
+print(f"FN:              {false_negative}")
+print()
+print(f"Precision:       {precision * 100:.2f}%")
+print(f"Recall:          {recall * 100:.2f}%")
+print(f"F1 Score:        {f1 * 100:.2f}%")

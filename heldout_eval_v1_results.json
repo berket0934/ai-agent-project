@@ -1,0 +1,1012 @@
+{
+    "version": "rag_v2_structured_claims_repair_plus_deterministic_rescue",
+    "config": {
+        "retrieval_threshold": 0.5,
+        "evidence_relevance_threshold": 0.35,
+        "entailment_threshold": 0.7,
+        "top_k": 3
+    },
+    "metrics": {
+        "accuracy": 0.9666666666666667,
+        "precision": 0.9375,
+        "recall": 1.0,
+        "f1": 0.967741935483871,
+        "true_positive": 15,
+        "true_negative": 14,
+        "false_positive": 1,
+        "false_negative": 0,
+        "repair_success_count": 1,
+        "rescue_success_count": 1
+    },
+    "tests": [
+        {
+            "question": "What is the deadline for sending an item back after it has been delivered?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "30 days after delivery",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.570559024810791,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"30 days after delivery\",\n    \"claims\": [\n        \"The deadline for returning items after delivery is 30 days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "30 days after delivery",
+                        "claims": [
+                            "The deadline for returning items after delivery is 30 days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "The deadline for returning items after delivery is 30 days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Customers can return products within 30 days after delivery. The product must be unused and in its original packaging.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.7153859734535217,
+                        "entailment": 0.9979799389839172,
+                        "contradiction": 3.177566031808965e-05,
+                        "neutral": 0.0019882863853126764
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Does a returned product need to remain in its original packaging?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, a returned product needs to remain in its original packaging.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.6388521194458008,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, a returned product needs to remain in its original packaging.\",\n    \"claims\": [\n        \"A returned product should retain its original packaging.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, a returned product needs to remain in its original packaging.",
+                        "claims": [
+                            "A returned product should retain its original packaging."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "A returned product should retain its original packaging.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The product must be unused and in its original packaging. Refunds are processed within 5 business days after the returned product is received.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.5464596748352051,
+                        "entailment": 0.9960642457008362,
+                        "contradiction": 0.00028433845727704465,
+                        "neutral": 0.0036514292005449533
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Once you receive my returned item, how long does refund processing normally take?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Standard shipping usually takes between 3 and 5 business days.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.8125723600387573,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Standard shipping usually takes between 3 and 5 business days.\",\n    \"claims\": [\n        \"Standard shipping usually takes between 3 and 5 business days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Standard shipping usually takes between 3 and 5 business days.",
+                        "claims": [
+                            "Standard shipping usually takes between 3 and 5 business days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Standard shipping usually takes between 3 and 5 business days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Standard shipping usually takes between 3 and 5 business days.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9999999403953552,
+                        "entailment": 0.9956934452056885,
+                        "contradiction": 0.00019539921777322888,
+                        "neutral": 0.004111105110496283
+                    }
+                ]
+            }
+        },
+        {
+            "question": "What is the typical delivery window for standard shipping?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Between 3 and 5 business days.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.5651825070381165,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Between 3 and 5 business days.\",\n    \"claims\": [\n        \"Standard shipping typically takes between 3 and 5 business days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Between 3 and 5 business days.",
+                        "claims": [
+                            "Standard shipping typically takes between 3 and 5 business days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Standard shipping typically takes between 3 and 5 business days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Standard shipping usually takes between 3 and 5 business days.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9966827034950256,
+                        "entailment": 0.9983205199241638,
+                        "contradiction": 6.057937935111113e-05,
+                        "neutral": 0.0016188840381801128
+                    }
+                ]
+            }
+        },
+        {
+            "question": "How quickly should I normally expect an express shipment to arrive?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Express shipping is available and typically takes 1 to 2 business days.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.767221212387085,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Express shipping is available and typically takes 1 to 2 business days.\",\n    \"claims\": [\n        \"Express shipping is available and typically takes 1 to 2 business days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Express shipping is available and typically takes 1 to 2 business days.",
+                        "claims": [
+                            "Express shipping is available and typically takes 1 to 2 business days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Express shipping is available and typically takes 1 to 2 business days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Express shipping is available and normally takes 1 to 2 business days.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.9925201535224915,
+                        "entailment": 0.9983078241348267,
+                        "contradiction": 6.234085594769567e-05,
+                        "neutral": 0.0016297734109684825
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Could shipping take extra time around holiday periods?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, shipping times may be longer during holidays.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.6753557920455933,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, shipping times may be longer during holidays.\",\n    \"claims\": [\n        \"Yes, shipping times may be longer during holidays.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, shipping times may be longer during holidays.",
+                        "claims": [
+                            "Yes, shipping times may be longer during holidays."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Yes, shipping times may be longer during holidays.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Express shipping is available and normally takes 1 to 2 business days. Shipping times may be longer during holidays.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.6536334753036499,
+                        "entailment": 0.9972739815711975,
+                        "contradiction": 6.231253064470366e-05,
+                        "neutral": 0.002663686638697982
+                    }
+                ]
+            }
+        },
+        {
+            "question": "What warranty period comes with electronic products?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Two years.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.7178723812103271,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Two years.\",\n    \"claims\": [\n        \"The warranty is two years.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Two years.",
+                        "claims": [
+                            "The warranty is two years."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "The warranty is two years.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.6564524173736572,
+                        "entailment": 0.9968709349632263,
+                        "contradiction": 6.735407077940181e-05,
+                        "neutral": 0.0030617504380643368
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Are manufacturing defects covered by the electronics warranty?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Manufacturing defects are covered by the electronics warranty.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.6775426864624023,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Manufacturing defects are covered by the electronics warranty.\",\n    \"claims\": [\n        \"Manufacturing defects are covered by the electronics warranty.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Manufacturing defects are covered by the electronics warranty.",
+                        "claims": [
+                            "Manufacturing defects are covered by the electronics warranty."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Manufacturing defects are covered by the electronics warranty.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.7038564682006836,
+                        "entailment": 0.9973201155662537,
+                        "contradiction": 0.00012299224908929318,
+                        "neutral": 0.0025568560231477022
+                    }
+                ]
+            }
+        },
+        {
+            "question": "If I accidentally damage an electronic product, will the warranty cover it?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "No, the warranty does not cover accidental damage or damage caused by improper use.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.7006975412368774,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, the warranty does not cover accidental damage or damage caused by improper use.\",\n    \"claims\": [\n        \"The warranty does not cover accidental damage or damage caused by improper use.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, the warranty does not cover accidental damage or damage caused by improper use.",
+                        "claims": [
+                            "The warranty does not cover accidental damage or damage caused by improper use."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "The warranty does not cover accidental damage or damage caused by improper use.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.8786360025405884,
+                        "entailment": 0.997757613658905,
+                        "contradiction": 4.854683720623143e-05,
+                        "neutral": 0.0021938267163932323
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Is damage caused by improper use covered under the warranty?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "No, damage caused by improper use is not covered under the warranty.",
+                "pipeline_stage": "repair_supported",
+                "repair_used": true,
+                "rescue_used": false,
+                "retrieval_score": 0.6806429624557495,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, damage caused by improper use is covered under the warranty.\",\n    \"claims\": [\n        \"Damage caused by improper use is covered under the warranty.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, damage caused by improper use is covered under the warranty.",
+                        "claims": [
+                            "Damage caused by improper use is covered under the warranty."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, damage caused by improper use is not covered under the warranty.\",\n    \"claims\": [\n        \"Damage caused by improper use is not covered under the warranty.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, damage caused by improper use is not covered under the warranty.",
+                        "claims": [
+                            "Damage caused by improper use is not covered under the warranty."
+                        ]
+                    }
+                },
+                "claims": [
+                    {
+                        "claim": "Damage caused by improper use is not covered under the warranty.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.7839387655258179,
+                        "entailment": 0.9979713559150696,
+                        "contradiction": 4.710123175755143e-05,
+                        "neutral": 0.0019815152045339346
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Which type of shipping do premium members receive for free?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "free standard shipping",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.8942257165908813,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"free standard shipping\",\n    \"claims\": [\n        \"Free standard shipping\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "free standard shipping",
+                        "claims": [
+                            "Free standard shipping"
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Free standard shipping",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Premium members receive free standard shipping on all orders.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.7461044192314148,
+                        "entailment": 0.7606691122055054,
+                        "contradiction": 0.019768742844462395,
+                        "neutral": 0.21956220269203186
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Do premium members get access to promotions before other customers?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, premium members receive access to promotions before other customers.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.7371160984039307,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, premium members receive access to promotions before other customers.\",\n    \"claims\": [\n        \"Premium members receive access to promotions before other customers.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, premium members receive access to promotions before other customers.",
+                        "claims": [
+                            "Premium members receive access to promotions before other customers."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Premium members receive access to promotions before other customers.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Premium members receive free standard shipping on all orders. They also receive early access to discounts and special promotions.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.7524826526641846,
+                        "entailment": 0.9942010045051575,
+                        "contradiction": 2.4714101527933963e-05,
+                        "neutral": 0.005774250254034996
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Am I allowed to cancel a premium membership whenever I want?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, you can cancel a premium membership whenever you want.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.8914929628372192,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, you can cancel a premium membership whenever you want.\",\n    \"claims\": [\n        \"You can cancel a premium membership anytime.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, you can cancel a premium membership whenever you want.",
+                        "claims": [
+                            "You can cancel a premium membership anytime."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "You can cancel a premium membership anytime.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "They also receive early access to discounts and special promotions. Premium membership can be cancelled at any time.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.8348199725151062,
+                        "entailment": 0.9983053207397461,
+                        "contradiction": 3.48542926076334e-05,
+                        "neutral": 0.001659743720665574
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Would returning an order four weeks after delivery still be within the allowed return period?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Four week is 28 days, which is within the 30-day return window. Other return conditions must also be satisfied.",
+                "pipeline_stage": "deterministic_rescue",
+                "repair_used": true,
+                "rescue_used": true,
+                "retrieval_score": 0.5812881588935852,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, returning an order four weeks after delivery would still be within the allowed return period.\",\n    \"claims\": [\n        \"Returning an order four weeks after delivery would still be within the allowed return period.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, returning an order four weeks after delivery would still be within the allowed return period.",
+                        "claims": [
+                            "Returning an order four weeks after delivery would still be within the allowed return period."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, returning an order four weeks after delivery would not be within the allowed return period.\",\n    \"claims\": [\n        \"Returning an order four weeks after delivery would not be within the allowed return period.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, returning an order four weeks after delivery would not be within the allowed return period.",
+                        "claims": [
+                            "Returning an order four weeks after delivery would not be within the allowed return period."
+                        ]
+                    }
+                },
+                "rescue_reason": "duration_rescue",
+                "calculation": {
+                    "input": "four week",
+                    "normalized_days": 28,
+                    "return_window_days": 30,
+                    "inside_window": true
+                },
+                "claims": [
+                    {
+                        "claim": "Customers can return products within 30 days after delivery.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Customers can return products within 30 days after delivery.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 1.0000001192092896,
+                        "entailment": 0.9955974221229553,
+                        "contradiction": 0.00018397573148831725,
+                        "neutral": 0.004218610469251871
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I send back a product that I already used if only five days have passed?",
+            "expected_supported": true,
+            "predicted_supported": true,
+            "classification": "TP",
+            "error_type": null,
+            "result": {
+                "status": "supported",
+                "answer": "Yes, you can send back a product that has been used for less than five days.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.6506802439689636,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, you can send back a product that has been used for less than five days.\",\n    \"claims\": [\n        \"You can send back a product that has been used for less than five days.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, you can send back a product that has been used for less than five days.",
+                        "claims": [
+                            "You can send back a product that has been used for less than five days."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "You can send back a product that has been used for less than five days.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "The product must be unused and in its original packaging. Refunds are processed within 5 business days after the returned product is received.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.5544545650482178,
+                        "entailment": 0.9421562552452087,
+                        "contradiction": 0.00800633430480957,
+                        "neutral": 0.049837496131658554
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I choose store credit instead of receiving a refund?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.35981976985931396,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Is express shipping free for premium members?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "rescue_used": false,
+                "retrieval_score": 0.7897640466690063,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Express shipping is not free for premium members.\",\n    \"claims\": [\n        \"Express shipping is not free for premium members.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Express shipping is not free for premium members.",
+                        "claims": [
+                            "Express shipping is not free for premium members."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"Express shipping is not free for premium members.\",\n    \"claims\": [\n        \"Express shipping is not free for premium members.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Express shipping is not free for premium members.",
+                        "claims": [
+                            "Express shipping is not free for premium members."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "Express shipping is not free for premium members.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use. Premium members receive free standard shipping on all orders.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.49460047483444214,
+                        "entailment": 0.010569100268185139,
+                        "contradiction": 0.3028983473777771,
+                        "neutral": 0.6865325570106506
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I exchange a product for a different size instead of returning it?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.45408445596694946,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Who pays the shipping cost when I return a product?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.46423375606536865,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can orders be shipped to countries outside the domestic market?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.3011511564254761,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Will I receive a tracking number after my order ships?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.34761691093444824,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Are packages delivered on weekends?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.48379290103912354,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Is a signature required when my package is delivered?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.28520745038986206,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "How much does the premium membership cost?",
+            "expected_supported": false,
+            "predicted_supported": true,
+            "classification": "FP",
+            "error_type": "safety_failure_false_positive",
+            "result": {
+                "status": "supported",
+                "answer": "Free standard shipping on all orders.",
+                "pipeline_stage": "initial_supported",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.628081202507019,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Free standard shipping on all orders.\",\n    \"claims\": [\n        \"Free standard shipping on all orders.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Free standard shipping on all orders.",
+                        "claims": [
+                            "Free standard shipping on all orders."
+                        ]
+                    }
+                },
+                "repair_generation": null,
+                "claims": [
+                    {
+                        "claim": "Free standard shipping on all orders.",
+                        "supported": true,
+                        "reason": "supported",
+                        "evidence": "Premium members receive free standard shipping on all orders. They also receive early access to discounts and special promotions.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.6939229965209961,
+                        "entailment": 0.9966850876808167,
+                        "contradiction": 0.0001600316900294274,
+                        "neutral": 0.003154837293550372
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Is there a free trial for premium membership?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "rescue_used": false,
+                "retrieval_score": 0.648735523223877,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, there is a free trial for premium membership.\",\n    \"claims\": [\n        \"There is a free trial for premium membership.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, there is a free trial for premium membership.",
+                        "claims": [
+                            "There is a free trial for premium membership."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, there is no mention of a free trial for premium membership in the given context.\",\n    \"claims\": []\n}",
+                    "parsed": {
+                        "answer": "No, there is no mention of a free trial for premium membership in the given context.",
+                        "claims": []
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "no_claims_generated",
+                "claims": []
+            }
+        },
+        {
+            "question": "Does the warranty cover normal battery wear over time?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.4743190407752991,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Can the electronics warranty be transferred to another person?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "rescue_used": false,
+                "retrieval_score": 0.5328340530395508,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"Yes, the warranty can be transferred to another person.\",\n    \"claims\": [\n        \"Yes, the warranty can be transferred to another person.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "Yes, the warranty can be transferred to another person.",
+                        "claims": [
+                            "Yes, the warranty can be transferred to another person."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, the warranty cannot be transferred to another person.\",\n    \"claims\": [\n        \"No, the warranty cannot be transferred to another person.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, the warranty cannot be transferred to another person.",
+                        "claims": [
+                            "No, the warranty cannot be transferred to another person."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "No, the warranty cannot be transferred to another person.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "All electronic products include a two-year warranty. The warranty covers manufacturing defects but does not cover accidental damage or damage caused by improper use.",
+                        "evidence_type": "full_chunk",
+                        "evidence_similarity": 0.3955342769622803,
+                        "entailment": 0.00019901480118278414,
+                        "contradiction": 0.9930601119995117,
+                        "neutral": 0.006740862503647804
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I return a product without a receipt?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "The provided documents do not contain enough verified information to answer this question reliably.",
+                "pipeline_stage": "repair_failed",
+                "repair_used": true,
+                "rescue_used": false,
+                "retrieval_score": 0.6252012252807617,
+                "initial_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot return a product without a receipt.\",\n    \"claims\": [\n        \"You cannot return a product without a receipt.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot return a product without a receipt.",
+                        "claims": [
+                            "You cannot return a product without a receipt."
+                        ]
+                    }
+                },
+                "repair_generation": {
+                    "raw": "{\n    \"answer\": \"No, you cannot return a product without a receipt.\",\n    \"claims\": [\n        \"You cannot return a product without a receipt.\"\n    ]\n}",
+                    "parsed": {
+                        "answer": "No, you cannot return a product without a receipt.",
+                        "claims": [
+                            "You cannot return a product without a receipt."
+                        ]
+                    }
+                },
+                "initial_failure_reason": "claim_verification_failed",
+                "repair_failure_reason": "claim_verification_failed",
+                "claims": [
+                    {
+                        "claim": "You cannot return a product without a receipt.",
+                        "supported": false,
+                        "reason": "evidence_does_not_entail_claim",
+                        "evidence": "The product must be unused and in its original packaging.",
+                        "evidence_type": "sentence",
+                        "evidence_similarity": 0.4349674582481384,
+                        "entailment": 0.0038036867044866085,
+                        "contradiction": 0.004131645429879427,
+                        "neutral": 0.9920646548271179
+                    }
+                ]
+            }
+        },
+        {
+            "question": "Can I cancel an order before it has been shipped?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.36916518211364746,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        },
+        {
+            "question": "Are customs or import fees included in the shipping cost?",
+            "expected_supported": false,
+            "predicted_supported": false,
+            "classification": "TN",
+            "error_type": null,
+            "result": {
+                "status": "not_supported",
+                "answer": "I do not have enough information in the provided documents.",
+                "pipeline_stage": "retrieval_reject",
+                "repair_used": false,
+                "rescue_used": false,
+                "retrieval_score": 0.37987518310546875,
+                "initial_generation": null,
+                "repair_generation": null,
+                "claims": []
+            }
+        }
+    ]
+}
